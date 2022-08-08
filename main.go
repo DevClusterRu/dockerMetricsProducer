@@ -1,9 +1,7 @@
 package main
 
 import (
-	"context"
 	"fmt"
-	"github.com/docker/docker/client"
 	"github.com/mackerelio/go-osstat/cpu"
 	"github.com/mackerelio/go-osstat/memory"
 	"log"
@@ -19,22 +17,18 @@ type System struct {
 	Memory float64
 }
 
+var hostname string
+
 func main() {
-
-	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
-	if err != nil {
-		log.Fatal(err)
-	}
-	ctx := context.Background()
-
-	info, err := cli.Info(ctx)
+	var err error
+	hostname, err = os.Hostname()
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	for {
 		sys := System{
-			Node: info.Name,
+			Node: hostname,
 		}
 
 		memory, err := memory.Get()
