@@ -51,7 +51,7 @@ func main() {
 		total := float64(after.Total - before.Total)
 		sys.Cpu = 100 - float64(after.Idle-before.Idle)/total*100
 
-		client, err := rpc.DialHTTP("tcp", "ip-172-31-47-31:4480")
+		client, err := rpc.DialHTTP("tcp", "3.134.16.137:4480")
 		if err != nil {
 			log.Panicf("Error in dialing. %s", err.Error())
 		}
