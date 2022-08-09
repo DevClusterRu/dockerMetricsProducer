@@ -41,7 +41,7 @@ func LocalIP() (net.IP, error) {
 				ip = v.IP
 			}
 
-			if strings.Contains(ip.String(), "172.") {
+			if strings.Contains(ip.String(), "172.31") {
 				return ip, nil
 			}
 		}
