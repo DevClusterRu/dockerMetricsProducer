@@ -32,6 +32,7 @@ func main() {
 		memory, err := memory.Get()
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "%s\n", err)
+
 			return
 		}
 
