@@ -52,14 +52,14 @@ func LocalIP() (net.IP, error) {
 
 func main() {
 
-	ip, err := LocalIP()
+	ip, err := os.Hostname()
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	for {
 		sys := System{
-			Node: ip.String(),
+			Node: ip,
 		}
 
 		memory, err := memory.Get()
