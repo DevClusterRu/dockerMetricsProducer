@@ -6,10 +6,8 @@ import (
 	"github.com/mackerelio/go-osstat/memory"
 	"log"
 	"math"
-	"net"
 	"net/rpc"
 	"os"
-	"strings"
 	"time"
 )
 
@@ -17,37 +15,6 @@ type System struct {
 	Node   string
 	Cpu    float64
 	Memory float64
-}
-
-var hostname string
-
-func LocalIP() (net.IP, error) {
-	ifaces, err := net.Interfaces()
-	if err != nil {
-		return nil, err
-	}
-	for _, i := range ifaces {
-		addrs, err := i.Addrs()
-		if err != nil {
-			return nil, err
-		}
-
-		for _, addr := range addrs {
-			var ip net.IP
-			switch v := addr.(type) {
-			case *net.IPNet:
-				ip = v.IP
-			case *net.IPAddr:
-				ip = v.IP
-			}
-
-			if strings.Contains(ip.String(), "172.31") {
-				return ip, nil
-			}
-		}
-	}
-
-	return nil, err
 }
 
 func main() {
