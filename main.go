@@ -69,7 +69,6 @@ func main() {
 		}
 
 		sys.Memory = math.Round(float64(memory.Used/1024) / float64(memory.Total/1024) * 100)
-
 		before, err := cpu.Get()
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "%s\n", err)
