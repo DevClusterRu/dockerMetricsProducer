@@ -65,7 +65,7 @@ func main() {
 
 		err = client.Call("Jobs.PushMetric", sys, &result)
 		if err != nil {
-			log.Println("Error in push. %s", err.Error())
+			log.Fatal("Error in push. %s", err.Error())
 		}
 
 		time.Sleep(5 * time.Second)
