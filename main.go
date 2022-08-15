@@ -54,6 +54,7 @@ func main() {
 		if err != nil {
 			log.Panicf("Error in dialing. %s", err.Error())
 		}
+
 		defer client.Close()
 		var result string
 
