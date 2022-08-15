@@ -41,6 +41,7 @@ func main() {
 			fmt.Fprintf(os.Stderr, "%s\n", err)
 			return
 		}
+
 		time.Sleep(time.Duration(1) * time.Second)
 		after, err := cpu.Get()
 		if err != nil {
