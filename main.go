@@ -24,6 +24,13 @@ func main() {
 		log.Fatal(err)
 	}
 
+	client, err := rpc.DialHTTP("tcp", "3.134.16.137:4480")
+	if err != nil {
+		log.Panicf("Error in dialing. %s", err.Error())
+	}
+
+	defer client.Close()
+
 	for {
 		sys := System{
 			Node: ip,
@@ -51,12 +58,6 @@ func main() {
 		total := float64(after.Total - before.Total)
 		sys.Cpu = 100 - float64(after.Idle-before.Idle)/total*100
 
-		client, err := rpc.DialHTTP("tcp", "3.134.16.137:4480")
-		if err != nil {
-			log.Panicf("Error in dialing. %s", err.Error())
-		}
-
-		defer client.Close()
 		var result string
 
 		err = client.Call("Jobs.PushMetric", sys, &result)
