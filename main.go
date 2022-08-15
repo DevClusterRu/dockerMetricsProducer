@@ -24,7 +24,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	client, err := rpc.DialHTTP("tcp", "swarm:4480")
+	client, err := rpc.DialHTTP("tcp", "172.31.47.31:4480")
 	if err != nil {
 		log.Panicf("Error in dialing. %s", err.Error())
 	}
