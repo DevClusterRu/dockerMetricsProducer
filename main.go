@@ -56,6 +56,7 @@ func main() {
 			return
 		}
 		total := float64(after.Total - before.Total)
+
 		sys.Cpu = 100 - float64(after.Idle-before.Idle)/total*100
 
 		var result string
