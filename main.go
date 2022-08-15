@@ -29,6 +29,8 @@ func main() {
 		log.Panicf("Error in dialing. %s", err.Error())
 	}
 
+	log.Println("Started....")
+
 	defer client.Close()
 
 	for {
