@@ -2,6 +2,7 @@ version: '3.4'
 services:
   swarm:
     image: 355982936287.dkr.ecr.us-east-2.amazonaws.com/docker_metrics_producer
+    hostname: "{{.Node.Hostname}}"
     deploy:
       mode: global
       update_config:
