@@ -12,9 +12,6 @@ services:
         order: start-first
       restart_policy:
         condition: on-failure
-      placement:
-        constraints:
-          - node.role==worker
     command: ["go", "run", "main.go"]
 
 
