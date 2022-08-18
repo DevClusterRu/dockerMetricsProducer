@@ -27,7 +27,6 @@ func main() {
 
 	rpcAddr := "172.31.47.31:4480"
 	if strings.Contains(ip, "dcdell") {
-
 		rpcAddr = "3.134.16.137:4480"
 	}
 
