@@ -12,9 +12,9 @@ import (
 )
 
 type System struct {
-	Node   string
-	Cpu    float64
-	Memory float64
+	Node        string
+	MetricName  string
+	MetricValue float64
 }
 
 func main() {
@@ -34,9 +34,8 @@ func main() {
 	defer client.Close()
 
 	for {
-		sys := System{
-			Node: ip,
-		}
+
+		mPackage := []System{}
 
 		memory, err := memory.Get()
 		if err != nil {
@@ -44,7 +43,14 @@ func main() {
 			return
 		}
 
-		sys.Memory = math.Round(float64(memory.Used/1024) / float64(memory.Total/1024) * 100)
+		mem := math.Round(float64(memory.Used/1024) / float64(memory.Total/1024) * 100)
+
+		mPackage = append(mPackage, System{
+			Node:        ip,
+			MetricName:  "memory_available_percently",
+			MetricValue: mem,
+		})
+
 		before, err := cpu.Get()
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "%s\n", err)
@@ -59,11 +65,17 @@ func main() {
 		}
 		total := float64(after.Total - before.Total)
 
-		sys.Cpu = 100 - float64(after.Idle-before.Idle)/total*100
+		cpu := 100 - float64(after.Idle-before.Idle)/total*100
+
+		mPackage = append(mPackage, System{
+			Node:        ip,
+			MetricName:  "cpu_available_percently",
+			MetricValue: cpu,
+		})
 
 		var result string
 
-		err = client.Call("Jobs.PushMetric", sys, &result)
+		err = client.Call("Jobs.PushMetric", mPackage, &result)
 		if err != nil {
 			log.Fatal("Error in push. %s", err.Error())
 		}
