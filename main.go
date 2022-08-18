@@ -8,6 +8,7 @@ import (
 	"math"
 	"net/rpc"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -24,7 +25,12 @@ func main() {
 		log.Fatal(err)
 	}
 
-	client, err := rpc.DialHTTP("tcp", "172.31.47.31:4480")
+	rpcAddr := "172.31.47.31:4480"
+	if strings.Contains(ip, "dcdell") {
+		rpcAddr = "3.134.16.137:4480"
+	}
+
+	client, err := rpc.DialHTTP("tcp", rpcAddr)
 	if err != nil {
 		log.Panicf("Error in dialing. %s", err.Error())
 	}
