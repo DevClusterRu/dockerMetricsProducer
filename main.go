@@ -33,6 +33,7 @@ func main() {
 
 	client, err := rpc.DialHTTP("tcp", rpcAddr)
 	if err != nil {
+
 		log.Panicf("Error in dialing. %s", err.Error())
 	}
 
