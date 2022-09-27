@@ -19,7 +19,6 @@ type System struct {
 }
 
 func main() {
-
 	ip, err := os.Hostname()
 	if err != nil {
 		log.Fatal(err)
