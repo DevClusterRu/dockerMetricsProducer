@@ -23,7 +23,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	rpcAddr := "172.31.47.31:4480"
 
 	if strings.Contains(ip, "dcdell") {
